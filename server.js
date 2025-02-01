@@ -25,21 +25,21 @@ port.on('error', (err) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('New client connected');
+  console.log('Nuevo cliente conectado');
 
   socket.on('ledState', (data) => {
     console.log(`LED${data.led} State: `, data.state);
     const message = data.led === 1 ? (data.state ? '1' : '0') : (!data.state ? '3' : '2');
     port.write(message, (err) => {
       if (err) {
-        return console.log('Error on write: ', err.message);
+        return console.log('Error enviando: ', err.message);
       }
-      console.log('Message written');
+      console.log('Mensaje enviado');
     });
   });
 
   socket.on('disconnect', () => {
-    console.log('Client disconnected');
+    console.log('Cliente desconectado');
   });
 });
 
